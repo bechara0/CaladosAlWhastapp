@@ -9,12 +9,14 @@ function App() {
   return (
     <>
       <Header />
-      <Formulario caladas={caladas} setCaladas={setCaladas} />
-      <ListaCalados
-        setCalada={setCalada}
-        caladas={caladas}
-        setCaladas={setCaladas}
-      />
+      <div className="md:flex">
+        <Formulario caladas={caladas} setCaladas={setCaladas} />
+        <ListaCalados
+          setCalada={setCalada}
+          caladas={caladas}
+          setCaladas={setCaladas}
+        />
+      </div>
     </>
   );
 }

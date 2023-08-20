@@ -48,8 +48,8 @@ const Formulario = ({ caladas, setCaladas }) => {
   };
 
   return (
-    <>
-      <form className="m-5 md:w-1/2 lg:w-2/5" onSubmit={handleSubmit}>
+    <div className="m-5 md:w-1/2 lg:w-2/5">
+      <form onSubmit={handleSubmit}>
         <div className="my-3 grid">
           <label className="m-3 mr-5 text-xl font-bold">N° CTG:</label>
           <input
@@ -64,10 +64,11 @@ const Formulario = ({ caladas, setCaladas }) => {
           <label className="m-3 mr-5 text-xl font-bold ">Fecha Cupo:</label>
           <input
             className="rounded-xl p-1"
-            type="date"
+            type="text"
             name="fecha"
             onChange={(e) => setFecha(e.target.value)}
             value={fecha}
+            placeholder="Ingrese la fecha"
           />
         </div>
         <div className="my-3 grid">
@@ -144,7 +145,7 @@ const Formulario = ({ caladas, setCaladas }) => {
           />
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
