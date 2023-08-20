@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Formulario = () => {
+const Formulario = ({ caladas, setCaladas }) => {
+  const [ctg, setCtg] = useState("");
   const [fecha, setFecha] = useState("");
   const [especie, setEspecie] = useState("");
   const [titular, setTitular] = useState("");
@@ -9,24 +10,56 @@ const Formulario = () => {
   const [procedencia, setProcedencia] = useState("");
   const [analisis, setAnalisis] = useState("");
 
-  const [ërror, setError] = useState(false);
+  useEffect(() => {
+    console.log("calada actualizada: ", caladas);
+  }, [caladas]);
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
 
   const handleSubmit = (e) => {
-    e.preventdefault();
+    e.preventDefault();
 
-    if (
-      [fecha, especie, titular, patente, procedencia, analisis].includes("")
-    ) {
-      setError(true);
-      return;
-    }
-    setError(false);
+    const objetoCalado = {
+      ctg,
+      fecha,
+      especie,
+      titular,
+      remitente,
+      patente,
+      procedencia,
+      analisis,
+      id: generarId(),
+    };
+
+    setCaladas([...caladas, objetoCalado]);
+
+    setFecha("");
+    setCtg("");
+    setEspecie("");
+    setTitular("");
+    setRemitente("");
+    setPatente("");
+    setAnalisis("");
+    setProcedencia("");
   };
 
   return (
     <>
-      <form className="m-5 w-1/2" onSubmit={handleSubmit}>
-        {Error && <Error>Controlar Datos Faltantes</Error>}
+      <form className="m-5 md:w-1/2 lg:w-2/5" onSubmit={handleSubmit}>
+        <div className="my-3 grid">
+          <label className="m-3 mr-5 text-xl font-bold">N° CTG:</label>
+          <input
+            className="rounded-xl p-1"
+            type="text"
+            placeholder="Ingrese N° CTG"
+            onChange={(e) => setCtg(e.target.value)}
+            value={ctg}
+          />
+        </div>
         <div className="my-3 grid">
           <label className="m-3 mr-5 text-xl font-bold ">Fecha Cupo:</label>
           <input
@@ -34,6 +67,7 @@ const Formulario = () => {
             type="date"
             name="fecha"
             onChange={(e) => setFecha(e.target.value)}
+            value={fecha}
           />
         </div>
         <div className="my-3 grid">
@@ -42,10 +76,9 @@ const Formulario = () => {
             onChange={(e) => setEspecie(e.target.value)}
             className="rounded-xl p-1"
             name="especie"
+            value={especie}
           >
-            <option value="" selected disabled hidden>
-              Elije una especie
-            </option>
+            <option value="">Elije una especie</option>
             <option value="Maíz">Maíz</option>
             <option value="Soja">Soja</option>
             <option value="Trigo">Trigo</option>
@@ -59,6 +92,7 @@ const Formulario = () => {
             type="text"
             placeholder="Ingrese titular CPE"
             onChange={(e) => setTitular(e.target.value)}
+            value={titular}
           />
         </div>
         <div className="my-3 grid">
@@ -68,6 +102,7 @@ const Formulario = () => {
             type="text"
             placeholder="Ingrese Remitente Com."
             onChange={(e) => setRemitente(e.target.value)}
+            value={remitente}
           />
         </div>
         <div className="my-3 grid">
@@ -77,6 +112,7 @@ const Formulario = () => {
             type="text"
             placeholder="Ingrese patente"
             onChange={(e) => setPatente(e.target.value)}
+            value={patente}
           />
         </div>
         <div className="my-3 grid">
@@ -86,6 +122,7 @@ const Formulario = () => {
             type="text"
             placeholder="Ingrese procedencia"
             onChange={(e) => setProcedencia(e.target.value)}
+            value={procedencia}
           />
         </div>
         <div className="my-3 grid">
@@ -96,6 +133,7 @@ const Formulario = () => {
             rows="5"
             placeholder="Ingrese Calado"
             onChange={(e) => setAnalisis(e.target.value)}
+            value={analisis}
           ></textarea>
         </div>
         <div>
