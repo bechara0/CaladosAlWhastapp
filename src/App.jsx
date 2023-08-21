@@ -6,6 +6,7 @@ import ListaCalados from "./components/ListaCalados";
 function App() {
   const [caladas, setCaladas] = useState([]);
   const [calada, setCalada] = useState({});
+
   return (
     <>
       <Header />
@@ -15,6 +16,7 @@ function App() {
           setCalada={setCalada}
           caladas={caladas}
           setCaladas={setCaladas}
+          calada={calada}
         />
       </div>
     </>

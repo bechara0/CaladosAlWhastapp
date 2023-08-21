@@ -1,4 +1,8 @@
-export const Calada = ({ calada, setCaladas }) => {
+import { useState } from "react";
+import clipboardCopy from "clipboard-copy";
+
+export const Calada = ({ calada, setCalada }) => {
+  const [copiado, setCopiado] = useState(false);
   const {
     ctg,
     fecha,
@@ -10,6 +14,25 @@ export const Calada = ({ calada, setCaladas }) => {
     procedencia,
     analisis,
   } = calada;
+
+  const handleClick = () => {
+    const mensaje = `
+    *AGROCEREALES DON FERNANDO SRL*
+    _Nº_ _CTG:_ ${ctg} |  ${especie.toUpperCase()} | ${patente.toUpperCase()}
+    ${titular.toUpperCase()} / ${remitente.toUpperCase()} / ${remitente2.toUpperCase()}
+    _Procedencia:_ ${procedencia.toUpperCase()} | _Fecha cupo:_ ${fecha}
+    _Calado:_ *${analisis.toUpperCase()}*
+    `;
+    console.log("Mensaje...", mensaje);
+
+    clipboardCopy(mensaje);
+    setCopiado(true);
+
+    setTimeout(() => {
+      setCopiado(false);
+    }, 3000);
+  };
+
   return (
     <div className="md:w-2/5 ">
       <div className="my-5 border-2 leading-8 grid w-full  border-black p-2 rounded-2xl shadow-xl">
@@ -42,7 +65,10 @@ export const Calada = ({ calada, setCaladas }) => {
           Análisis: <span className="font-normal uppercase">{analisis}</span>
         </p>
 
-        <button className="bg-indigo-400 py-1 w-full rounded-2xl my-4">
+        <button
+          onClick={handleClick}
+          className="bg-indigo-400 py-1 w-full rounded-2xl my-4"
+        >
           Copiar
         </button>
       </div>
