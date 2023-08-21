@@ -23,7 +23,6 @@ export const Calada = ({ calada, setCalada }) => {
     _Procedencia:_ ${procedencia.toUpperCase()} | _Fecha cupo:_ ${fecha}
     _Calado:_ *${analisis.toUpperCase()}*
     `;
-    console.log("Mensaje...", mensaje);
 
     clipboardCopy(mensaje);
     setCopiado(true);
@@ -69,7 +68,7 @@ export const Calada = ({ calada, setCalada }) => {
           onClick={handleClick}
           className="bg-indigo-400 py-1 w-full rounded-2xl my-4"
         >
-          Copiar
+          {copiado ? "Copiado!" : "Copiar"}
         </button>
       </div>
     </div>

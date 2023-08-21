@@ -14,9 +14,9 @@ const Formulario = ({ caladas, setCaladas }) => {
   const [error, setError] = useState(false);
   const [validarCtg, setValidarCtg] = useState(false);
 
-  useEffect(() => {
-    console.log("calada actualizada: ", caladas);
-  }, [caladas]);
+  // useEffect(() => {
+  //   console.log("calada actualizada: ", caladas);
+  // }, [caladas]);
 
   const generarId = () => {
     const random = Math.random().toString(36).substr(2);
