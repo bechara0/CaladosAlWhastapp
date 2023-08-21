@@ -5,13 +5,14 @@ export const Calada = ({ calada, setCaladas }) => {
     especie,
     titular,
     remitente,
+    remitente2,
     patente,
     procedencia,
     analisis,
   } = calada;
   return (
-    <div className="md:w-2/5">
-      <div className="my-5 border-2 leading-8  w-full  border-black p-2 rounded-2xl shadow-xl">
+    <div className="md:w-2/5 ">
+      <div className="my-5 border-2 leading-8 grid w-full  border-black p-2 rounded-2xl shadow-xl">
         <p className="font-bold ml-3 mt-3">
           N° CTG: <span className="font-normal">{ctg}</span>
         </p>
@@ -22,7 +23,10 @@ export const Calada = ({ calada, setCaladas }) => {
           Titular: <span className="font-normal">{titular}</span>
         </p>
         <p className="font-bold ml-3">
-          Remitente <span className="font-normal">{remitente}</span>
+          Remitente: <span className="font-normal">{remitente}</span>
+        </p>
+        <p className="font-bold ml-3">
+          Remitente 2: <span className="font-normal">{remitente2}</span>
         </p>
         <p className="font-bold ml-3">
           Patente: <span className="font-normal">{patente}</span>
@@ -33,9 +37,11 @@ export const Calada = ({ calada, setCaladas }) => {
         <p className="font-bold ml-3">
           Fecha cupo: <span className="font-normal">{fecha}</span>
         </p>
-        <p className="font-bold ml-3">
-          Análisis: <span className="font-normal">{analisis}</span>
+
+        <p className="font-bold ml-3 overflow-hidden">
+          Análisis: <span className="font-normal uppercase">{analisis}</span>
         </p>
+
         <button className="bg-indigo-400 py-1 w-full rounded-2xl my-4">
           Copiar
         </button>

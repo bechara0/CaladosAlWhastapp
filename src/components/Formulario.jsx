@@ -6,9 +6,13 @@ const Formulario = ({ caladas, setCaladas }) => {
   const [especie, setEspecie] = useState("");
   const [titular, setTitular] = useState("");
   const [remitente, setRemitente] = useState("");
+  const [remitente2, setRemitente2] = useState("");
   const [patente, setPatente] = useState("");
   const [procedencia, setProcedencia] = useState("");
   const [analisis, setAnalisis] = useState("");
+
+  const [error, setError] = useState(false);
+  const [validarCtg, setValidarCtg] = useState(false);
 
   useEffect(() => {
     console.log("calada actualizada: ", caladas);
@@ -23,12 +27,30 @@ const Formulario = ({ caladas, setCaladas }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      [ctg, fecha, especie, titular, patente, procedencia, analisis].includes(
+        ""
+      )
+    ) {
+      setError(true);
+      console.log("Campos obligatorios vacios", error);
+      return;
+    }
+    setError(false);
+
+    if (ctg.length !== 11) {
+      setValidarCtg(true);
+      return;
+    }
+    setValidarCtg(false);
+
     const objetoCalado = {
       ctg,
       fecha,
       especie,
       titular,
       remitente,
+      remitente2,
       patente,
       procedencia,
       analisis,
@@ -42,6 +64,7 @@ const Formulario = ({ caladas, setCaladas }) => {
     setEspecie("");
     setTitular("");
     setRemitente("");
+    setRemitente2("");
     setPatente("");
     setAnalisis("");
     setProcedencia("");
@@ -50,6 +73,17 @@ const Formulario = ({ caladas, setCaladas }) => {
   return (
     <div className="m-5 md:w-1/2 lg:w-2/6">
       <form onSubmit={handleSubmit}>
+        {error && (
+          <p className="bg-red-700 w-full text-center text-white font-bold uppercase">
+            completar campos obligatorios
+          </p>
+        )}
+        {validarCtg && (
+          <p className="bg-red-700 w-full text-center text-white font-bold uppercase">
+            Ingrese correctamente CTG
+          </p>
+        )}
+
         <div className="my-3 grid">
           <label className="m-3 mr-5 text-xl font-bold">N° CTG:</label>
           <input
@@ -87,7 +121,9 @@ const Formulario = ({ caladas, setCaladas }) => {
           </select>
         </div>
         <div className="my-3 grid">
-          <label className="m-3 mr-5 text-xl font-bold">Titular CPE:</label>
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Titular CPE:
+          </label>
           <input
             className="rounded-xl p-1"
             type="text"
@@ -97,7 +133,9 @@ const Formulario = ({ caladas, setCaladas }) => {
           />
         </div>
         <div className="my-3 grid">
-          <label className="m-3 mr-5 text-xl font-bold">Remitente:</label>
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Remitente:
+          </label>
           <input
             className="rounded-xl p-1"
             type="text"
@@ -107,7 +145,21 @@ const Formulario = ({ caladas, setCaladas }) => {
           />
         </div>
         <div className="my-3 grid">
-          <label className="m-3 mr-5 text-xl font-bold">Patente:</label>
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Remitente 2:
+          </label>
+          <input
+            className="rounded-xl p-1"
+            type="text"
+            placeholder="Ingrese Remitente Com."
+            onChange={(e) => setRemitente2(e.target.value)}
+            value={remitente2}
+          />
+        </div>
+        <div className="my-3 grid">
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Patente:
+          </label>
           <input
             className="rounded-xl p-1"
             type="text"
@@ -117,7 +169,9 @@ const Formulario = ({ caladas, setCaladas }) => {
           />
         </div>
         <div className="my-3 grid">
-          <label className="m-3 mr-5 text-xl font-bold">Procedencia:</label>
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Procedencia:
+          </label>
           <input
             className="rounded-xl p-1"
             type="text"
@@ -127,9 +181,11 @@ const Formulario = ({ caladas, setCaladas }) => {
           />
         </div>
         <div className="my-3 grid">
-          <label className="m-3 mr-5 text-xl font-bold">Análisis:</label>
+          <label className="m-3 mr-5 text-xl font-bold uppercase">
+            Análisis:
+          </label>
           <textarea
-            className="rounded-xl p-1"
+            className="rounded-xl p-1 uppercase"
             cols="25"
             rows="5"
             placeholder="Ingrese Calado"
