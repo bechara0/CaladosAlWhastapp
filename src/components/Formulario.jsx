@@ -48,7 +48,7 @@ const Formulario = ({ caladas, setCaladas }) => {
   };
 
   return (
-    <div className="m-5 md:w-1/2 lg:w-2/5">
+    <div className="m-5 md:w-1/2 lg:w-2/6">
       <form onSubmit={handleSubmit}>
         <div className="my-3 grid">
           <label className="m-3 mr-5 text-xl font-bold">N° CTG:</label>

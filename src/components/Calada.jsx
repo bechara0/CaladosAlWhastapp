@@ -10,7 +10,7 @@ export const Calada = ({ calada, setCaladas }) => {
     analisis,
   } = calada;
   return (
-    <div className="flex flex-row md:w-2/5">
+    <div className="md:w-2/5">
       <div className="my-5 border-2 leading-8  w-full  border-black p-2 rounded-2xl shadow-xl">
         <p className="font-bold ml-3 mt-3">
           N° CTG: <span className="font-normal">{ctg}</span>
